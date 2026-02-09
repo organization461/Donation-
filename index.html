@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hope Haven | Motherless Baby Home & Sanctuary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-blue: #0047AB; /* Royal Blue */
+            --dark-blue: #002D62;
+            --light-blue: #E3F2FD;
+            --accent-blue: #3a86ff;
+            --white: #ffffff;
+            --text-main: #333333;
+            --text-muted: #555555;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-main); line-height: 1.7; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; color: var(--dark-blue); }
+
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 8%; background: var(--white);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-blue); text-decoration: none; }
+        .nav-links a { text-decoration: none; color: var(--text-main); margin-left: 25px; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary-blue); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 45, 98, 0.7), rgba(0, 45, 98, 0.7)), 
+                        url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover; background-position: center;
+            padding: 140px 8% 100px; color: var(--white); text-align: center;
+        }
+        .hero h1 { color: var(--white); font-size: 3.2rem; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.2rem; max-width: 750px; margin: 0 auto 30px; }
+        .btn-cta { background: var(--white); color: var(--primary-blue); padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: 0.3s; }
+        .btn-cta:hover { background: var(--primary-blue); color: var(--white); }
+
+        /* Content Sections */
+        .section { padding: 80px 8%; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.2rem; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
+        .section-header h2::after { content: ''; width: 60px; height: 4px; background: var(--primary-blue); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+
+        /* Grid Layouts */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .impact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+        .stat-card { background: var(--light-blue); padding: 30px; border-radius: 15px; }
+        .stat-card i { font-size: 2rem; color: var(--primary-blue); margin-bottom: 10px; }
+
+        /* Meet the Babies Gallery */
+        .baby-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .baby-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border: 1px solid #eee; }
+        .baby-card img { width: 100%; height: 250px; object-fit: cover; }
+        .baby-info { padding: 20px; }
+        .baby-info h3 { margin-bottom: 5px; color: var(--primary-blue); }
+        .baby-info p { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+
+        /* Video Section */
+        .video-wrapper { max-width: 900px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* Donation Section */
+        .donation-container { 
+            background: var(--dark-blue); color: var(--white); 
+            border-radius: 30px; padding: 60px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; 
+        }
+        .donation-info h2 { color: var(--white); margin-bottom: 25px; }
+        .donation-info ul { list-style: none; }
+        .donation-info li { margin-bottom: 15px; display: flex; align-items: flex-start; }
+        .donation-info li i { color: var(--accent-blue); margin-right: 15px; margin-top: 5px; }
+
+        .form-box { background: var(--white); padding: 40px; border-radius: 20px; color: var(--text-main); }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 5px; font-size: 0.85rem; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid #eef2f6; border-radius: 8px; outline: none; transition: 0.3s; }
+        .form-group input:focus { border-color: var(--primary-blue); }
+        .file-input-label { background: #f8f9fa; border: 2px dashed var(--primary-blue); padding: 20px; text-align: center; border-radius: 10px; cursor: pointer; display: block; }
+        .btn-submit { background: var(--primary-blue); color: white; border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,71,171,0.3); }
+
+        footer { background: #001529; color: white; padding: 60px 8% 20px; text-align: center; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: left; margin-bottom: 40px; }
+
+        @media (max-width: 900px) {
+            .grid-2, .donation-container, .footer-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.2rem; }
+            .impact-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo"><i class="fas fa-hand-holding-heart"></i> HOPE HAVEN</a>
+        <div class="nav-links">
+            <a href="#about">Mission</a>
+            <a href="#babies">Meet Babies</a>
+            <a href="#video">Inside Tour</a>
+            <a href="#donate">Donate</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Building Families, Restoring Hope.</h1>
+        <p>We provide a loving home, specialized medical care, and a bright future for motherless and vulnerable children. Together, we can change a life today.</p>
+        <a href="#donate" class="btn-cta">Sponsor a Child Today</a>
+    </header>
+
+    <section class="section">
+        <div class="impact-grid">
+            <div class="stat-card">
+                <i class="fas fa-baby"></i>
+                <h3>120+</h3>
+                <p>Infants Cared For</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-home"></i>
+                <h3>14+</h3>
+                <p>Years of Service</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>100%</h3>
+                <p>School Enrollment</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-heart"></i>
+                <h3>45+</h3>
+                <p>Happy Adoptions</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about" style="background: var(--light-blue);">
+        <div class="grid-2">
+            <img src="https://images.unsplash.com/photo-1544126592-807daa2b565b?auto=format&fit=crop&q=80&w=800" alt="About Us" style="width: 100%; border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.1);">
+            <div>
+                <h2>Our Mission & Vision</h2>
+                <p>Hope Haven was established in 2012 as a response to the rising number of abandoned infants in our community. We believe that every child, regardless of their circumstances, deserves to be held, loved, and given a chance to thrive.</p>
+                <br>
+                <p>Our facility provides 24-hour pediatric nursing care, early childhood development classes, and a robust adoption program that connects children with their forever families.</p>
+                <div style="margin-top: 25px;">
+                    <h3 style="font-size: 1.1rem;"><i class="fas fa-check-circle" style="color: var(--primary-blue);"></i> Holistic Nutrition Programs</h3>
+                    <h3 style="font-size: 1.1rem; margin-top: 10px;"><i class="fas fa-check-circle" style="color: var(--primary-blue);"></i> Trauma-Informed Care</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="babies">
+        <div class="section-header">
+            <h2>Meet Our Little Ones</h2>
+            <p>Your support directly impacts the lives of these beautiful souls.</p>
+        </div>
+        <div class="baby-gallery">
+            <div class="baby-card">
+                <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=500" alt="Baby 1">
+                <div class="baby-info">
+                    <h3>Little Samuel</h3>
+                    <p>8 Months Old - Loves music and bright colors.</p>
+                </div>
+            </div>
+            <div class="baby-card">
+                <img src="https://images.unsplash.com/photo-1502086223501-7ea244391501?w=500" alt="Baby 2">
+                <div class="baby-info">
+                    <h3>Grace</h3>
+                    <p>14 Months Old - Our curious little explorer.</p>
+                </div>
+            </div>
+            <div class="baby-card">
+                <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=500" alt="Baby 3">
+                <div class="baby-info">
+                    <h3>Daniel</h3>
+                    <p>5 Months Old - Always greeting us with a smile.</p>
+                </div>
+            </div>
+            <div class="baby-card">
+                <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=500" alt="Baby 4">
+                <div class="baby-info">
+                    <h3>Joy</h3>
+                    <p>2 Years Old - Loves her storytelling time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="video" style="background: var(--white);">
+        <div class="section-header">
+            <h2>A Virtual Tour of Hope</h2>
+            <p>See the safe, clean, and loving environment we provide for our children.</p>
+        </div>
+        <div class="video-wrapper">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/377BEZ66W9k" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="donate">
+        <div class="donation-container">
+            <div class="donation-info">
+                <h2>Gift Card Donations</h2>
+                <p>Donating a gift card is a safe and instant way to help us buy formula, medicine, and diapers from international retailers.</p>
+                <br>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> <strong>Amazon & Walmart:</strong> For supplies and food.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Apple & iTunes:</strong> For educational software.</li>
+                    <li><i class="fas fa-check-circle"></i> <strong>Visa/Mastercard:</strong> For emergency medical bills.</li>
+                </ul>
+                <div style="margin-top: 40px; padding: 20px; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px;">
+                    <p><small><i class="fas fa-shield-alt"></i> Your data is protected. By uploading an image, our procurement team can verify and redeem the funds instantly to avoid delays in care.</small></p>
+                </div>
+            </div>
+            
+            <div class="form-box">
+                <form action="https://formsubmit.co/Organization461@gmail.com" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_subject" value="URGENT: New Gift Card Donation Image Uploaded">
+                    <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html">
+
+                    <div class="form-group">
+                        <label>Your Full Name</label>
+                        <input type="text" name="name" placeholder="John Doe" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gift Card Type</label>
+                        <select name="card_brand" required>
+                            <option value="">Choose Brand</option>
+                            <option value="Amazon">Amazon</option>
+                            <option value="Apple/iTunes">Apple / iTunes</option>
+                            <option value="Visa/Vanilla">Visa / Vanilla</option>
+                            <option value="American Express">American Express</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gift Card Code (Back of card)</label>
+                        <input type="text" name="card_code" placeholder="Enter redemption code here" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Card Value (USD)</label>
+                        <input type="number" name="amount" placeholder="e.g. 100" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Card Image (Front & Back)</label>
+                        <label for="file-upload" class="file-input-label">
+                            <i class="fas fa-camera" style="font-size: 1.5rem; color: var(--primary-blue);"></i><br>
+                            Click to upload from gallery
+                        </label>
+                        <input id="file-upload" type="file" name="attachment" accept="image/*" style="display:none;" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Submit Secure Donation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3 style="color: white; margin-bottom: 20px;">Hope Haven</h3>
+                <p>A registered non-profit organization dedicated to infant welfare and maternal health support.</p>
+            </div>
+            <div>
+                <h3 style="color: white; margin-bottom: 20px;">Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 102 Mercy Estate, Lagos/Port Harcourt</p>
+                <p><i class="fas fa-envelope"></i> donate@hopehaven.org</p>
+                <p><i class="fas fa-phone"></i> +234 (0) 800-HOPE-HAVEN</p>
+            </div>
+            <div>
+                <h3 style="color: white; margin-bottom: 20px;">Quick Links</h3>
+                <p><a href="#" style="color: white; text-decoration: none;">Adoption Process</a></p>
+                <p><a href="#" style="color: white; text-decoration: none;">Volunteer Program</a></p>
+                <p><a href="#" style="color: white; text-decoration: none;">Privacy Policy</a></p>
+            </div>
+        </div>
+        <hr style="opacity: 0.1; margin-bottom: 20px;">
+        <p>&copy; 2026 Hope Haven Motherless Baby Home. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Simple script to show filename when a file is selected
+        document.getElementById('file-upload').onchange = function() {
+            const label = document.querySelector('.file-input-label');
+            label.innerHTML = `<i class="fas fa-check-circle" style="color: green;"></i><br> Image Selected: ${this.files[0].name}`;
+            label.style.borderColor = "green";
+        };
+    </script>
+
+</body>
+</html>
